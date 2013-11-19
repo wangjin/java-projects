@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+                http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<!-- Root Context: defines shared resources visible to all other web components -->
+
+	<context:property-placeholder location="classpath:hibernate.properties" />
+
+	<context:component-scan base-package="tk.wangjinzone.businessledger.*" />
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${hibernate.driverClassName}"></property>
+		<property name="url" value="${hibernate.url}"></property>
+		<property name="username" value="${hibernate.username}"></property>
+		<property name="password" value="${hibernate.password}"></property>
+		<property name="initialSize" value="${hibernate.initialSize}"></property>
+		<property name="maxActive" value="${hibernate.maxActive}"></property>
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+				<prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+
+		<property name="packagesToScan">
+			<list>
+				<value>tk.wangjinzone.businessledger.pojo</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean name="txManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<tx:annotation-driven transaction-manager="txManager"
+		proxy-target-class="true" />
+</beans>
