@@ -24,6 +24,8 @@ public class User implements Serializable {
 
 	private String password;
 	
+	private String realName;
+	
 	private Set<BusinessLedger> businessLedgers;
 	
 	private Set<Project> projects;
@@ -74,4 +76,13 @@ public class User implements Serializable {
 	public void setProjects(Set<Project> projects) {
 		this.projects = projects;
 	}
+
+	public String getRealName() {
+		return realName;
+	}
+
+	public void setRealName(String realName) {
+		this.realName = realName;
+	}
+	
 }
