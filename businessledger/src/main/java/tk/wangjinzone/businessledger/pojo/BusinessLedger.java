@@ -23,6 +23,8 @@ public class BusinessLedger implements Serializable {
 	private String requestUrl;
 	
 	private String requestMethod;
+	
+	private String buisnessId;
 
 	private User user;
 	
@@ -103,5 +105,13 @@ public class BusinessLedger implements Serializable {
 
 	public void setRequestMethod(String requestMethod) {
 		this.requestMethod = requestMethod;
+	}
+
+	public String getBuisnessId() {
+		return buisnessId;
+	}
+
+	public void setBuisnessId(String buisnessId) {
+		this.buisnessId = buisnessId;
 	}
 }
