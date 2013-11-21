@@ -19,6 +19,7 @@
 		<property name="password" value="${hibernate.password}"></property>
 		<property name="initialSize" value="${hibernate.initialSize}"></property>
 		<property name="maxActive" value="${hibernate.maxActive}"></property>
+		<property name="validationQuery" value="${hibernate.validationQuery}"></property>
 	</bean>
 
 	<bean id="sessionFactory"
